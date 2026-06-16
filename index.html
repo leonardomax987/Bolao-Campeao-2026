@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+							<style>
+								body {
+									background-color: white; /* Ensure the iframe has a white background */
+								}
+
+								
+							</style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +22,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
             --yellow: #FFD700;
             --yellow-dark: #F0C000;
@@ -24,30 +38,24 @@
             --error: #CC0000;
             --success: #009C3B;
         }
-
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--blue); color: var(--black); min-height: 100vh; display: flex; flex-direction: column; }
-
         .top-bar { background-color: var(--blue); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--yellow); }
         .top-bar .logo { font-size: 1.4rem; font-weight: 800; color: var(--yellow); letter-spacing: 1px; text-transform: uppercase; }
         .top-bar .logo span { color: var(--green); }
         .top-bar .user-info { display: flex; align-items: center; gap: 12px; color: var(--white); font-size: 0.9rem; }
         .top-bar .user-info button { background: transparent; border: 1px solid var(--yellow); color: var(--yellow); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; }
         .top-bar .user-info button:hover { background: var(--yellow); color: var(--blue); }
-
         .nav-bar { background-color: var(--blue-light); display: flex; gap: 4px; padding: 0 24px; border-bottom: 2px solid var(--yellow); overflow-x: auto; }
         .nav-bar button { background: transparent; border: none; color: var(--gray); padding: 12px 16px; cursor: pointer; font-size: 0.88rem; font-weight: 600; border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap; }
         .nav-bar button:hover { color: var(--yellow); }
         .nav-bar button.active { color: var(--yellow); border-bottom: 3px solid var(--yellow); }
-
         .group-selector { background-color: var(--blue); padding: 8px 24px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--blue-light); }
         .group-selector span { color: var(--gray); font-size: 0.85rem; }
         .group-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
         .group-tab { background: var(--blue-light); border: 1px solid var(--gray-dark); color: var(--white); padding: 4px 14px; border-radius: 20px; cursor: pointer; font-size: 0.82rem; transition: all 0.2s; }
         .group-tab:hover { border-color: var(--yellow); color: var(--yellow); }
         .group-tab.active { background: var(--yellow); border-color: var(--yellow); color: var(--blue); font-weight: 700; }
-
         .main-content { flex: 1; padding: 24px; background-color: var(--gray-light); }
-
         .auth-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%); padding: 24px; }
         .auth-logo { text-align: center; margin-bottom: 32px; }
         .auth-logo .title { font-size: 2.2rem; font-weight: 900; color: var(--yellow); text-transform: uppercase; letter-spacing: 2px; line-height: 1.1; }
@@ -67,7 +75,6 @@
         .btn-secondary { width: 100%; padding: 11px; background: transparent; color: var(--blue); border: 2px solid var(--blue); border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s; margin-top: 10px; }
         .btn-secondary:hover { background: var(--blue); color: var(--white); }
         .auth-divider { text-align: center; color: var(--gray-dark); font-size: 0.85rem; margin: 16px 0; }
-
         .waiting-screen { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%); padding: 24px; text-align: center; }
         .waiting-card { background: var(--white); border-radius: 16px; padding: 48px 36px; max-width: 460px; width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
         .waiting-card .trophy { font-size: 4rem; margin-bottom: 16px; }
@@ -76,17 +83,14 @@
         .waiting-card .username-display { background: var(--yellow-light); border: 2px solid var(--yellow); border-radius: 8px; padding: 10px 20px; font-weight: 700; color: var(--blue); font-size: 1rem; margin-bottom: 24px; display: inline-block; }
         .waiting-card .logout-btn { background: transparent; border: 2px solid var(--gray); color: var(--gray-dark); padding: 9px 20px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; }
         .waiting-card .logout-btn:hover { border-color: var(--error); color: var(--error); }
-
         .loading-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%); flex-direction: column; gap: 16px; }
         .loading-spinner { width: 48px; height: 48px; border: 4px solid var(--yellow-light); border-top-color: var(--yellow); border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .loading-text { color: var(--white); font-size: 1rem; font-weight: 600; }
-
         .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--blue); color: var(--white); padding: 12px 24px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.3); transition: transform 0.3s ease; z-index: 1000; border-left: 4px solid var(--yellow); }
         .toast.show { transform: translateX(-50%) translateY(0); }
         .toast.success { border-left-color: var(--green); }
         .toast.error { border-left-color: var(--error); }
-
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 24px; }
         .modal-box { background: var(--white); border-radius: 16px; padding: 32px 28px; max-width: 420px; width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.3); text-align: center; }
         .modal-box .modal-icon { font-size: 2.5rem; margin-bottom: 12px; }
@@ -97,7 +101,6 @@
         .modal-btn-cancel:hover { border-color: var(--blue); color: var(--blue); }
         .modal-btn-confirm { padding: 10px 24px; background: var(--error); border: none; color: var(--white); border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.9rem; transition: background 0.2s; }
         .modal-btn-confirm:hover { background: #aa0000; }
-
         .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
         .page-header h2 { font-size: 1.3rem; color: var(--blue); font-weight: 800; }
         .page-header-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
@@ -105,7 +108,6 @@
         .save-btn:hover { background: var(--green-dark); }
         .delete-all-btn { background: transparent; color: var(--error); border: 2px solid var(--error); padding: 9px 16px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; white-space: nowrap; }
         .delete-all-btn:hover { background: var(--error); color: var(--white); }
-
         .special-section { background: var(--white); border-radius: 12px; padding: 20px; margin-bottom: 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid var(--yellow); }
         .special-section h3 { font-size: 1rem; color: var(--blue); font-weight: 800; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
         .special-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
@@ -116,12 +118,10 @@
         .special-locked-msg { font-size: 0.78rem; color: var(--error); margin-top: 8px; font-style: italic; }
         .scorer-other-input { margin-top: 6px; width: 100%; padding: 9px 12px; border: 2px solid var(--yellow); border-radius: 7px; font-size: 0.9rem; outline: none; color: var(--black); }
         .scorer-other-note { font-size: 0.72rem; color: var(--gray-dark); margin-top: 4px; font-style: italic; }
-
         .day-separator { display: flex; align-items: center; gap: 12px; margin: 24px 0 14px 0; }
         .day-separator .day-label { background: var(--blue); color: var(--yellow); font-size: 0.82rem; font-weight: 700; padding: 4px 14px; border-radius: 20px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.5px; }
         .day-separator .day-line { flex: 1; height: 1px; background: var(--gray); }
         .phase-header { background: var(--blue); color: var(--yellow); font-size: 0.95rem; font-weight: 800; padding: 8px 18px; border-radius: 8px; margin: 32px 0 16px 0; text-transform: uppercase; letter-spacing: 1px; display: inline-block; }
-
         .match-card { background: var(--white); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border: 2px solid transparent; transition: all 0.2s; position: relative; }
         .match-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
         .match-card.jogo-da-rodada { border-color: var(--yellow); box-shadow: 0 0 0 2px var(--yellow-light), 0 4px 14px rgba(0,0,0,0.1); }
@@ -150,7 +150,6 @@
         .jdr-btn.selected { background: var(--yellow); border-color: var(--yellow-dark); color: var(--blue); }
         .no-matches { text-align: center; padding: 40px; color: var(--gray-dark); font-size: 0.95rem; }
         .no-matches .icon { font-size: 2.5rem; margin-bottom: 10px; }
-
         .hoje-header { margin-bottom: 24px; }
         .hoje-header h2 { font-size: 1.3rem; color: var(--blue); font-weight: 800; margin-bottom: 4px; }
         .hoje-header .date-display { font-size: 0.9rem; color: var(--gray-dark); }
@@ -162,7 +161,6 @@
         .hoje-pick-none { color: var(--gray-dark); font-style: italic; }
         .hoje-jdr-badge { background: var(--yellow); color: var(--blue); font-size: 0.72rem; font-weight: 800; padding: 2px 10px; border-radius: 12px; }
         .hoje-pen-info { color: var(--gray-dark); font-size: 0.8rem; }
-
         .result-card { background: var(--white); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border: 2px solid transparent; }
         .result-card.jogo-da-rodada { border-color: var(--yellow); box-shadow: 0 0 0 2px var(--yellow-light), 0 4px 14px rgba(0,0,0,0.1); }
         .result-real-row { display: flex; align-items: center; justify-content: center; gap: 10px; }
@@ -183,7 +181,6 @@
         .result-summary .summary-label { font-size: 0.85rem; color: var(--gray); }
         .result-summary .summary-pts { font-size: 2rem; font-weight: 900; color: var(--yellow); }
         .result-summary .summary-detail { font-size: 0.82rem; color: var(--gray); margin-top: 2px; }
-
         .special-results-section { background: var(--white); border-radius: 12px; padding: 20px; margin-top: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-left: 4px solid var(--yellow); }
         .special-results-section h3 { font-size: 1rem; color: var(--blue); font-weight: 800; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
         .special-result-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-radius: 8px; margin-bottom: 8px; background: var(--gray-light); flex-wrap: wrap; gap: 10px; }
@@ -195,7 +192,6 @@
         .special-result-pick strong { color: var(--black); }
         .special-result-pick.correct strong { color: var(--green); font-weight: 800; }
         .special-result-no-pick { font-size: 0.82rem; color: var(--gray-dark); font-style: italic; }
-
         .gerais-group-selector { background: var(--white); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
         .gerais-group-selector span { font-size: 0.85rem; font-weight: 700; color: var(--blue); text-transform: uppercase; }
         .gerais-group-btn { background: var(--gray-light); border: 2px solid var(--gray); color: var(--gray-dark); padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; }
@@ -241,7 +237,6 @@
         .special-gerais-value { color: var(--black); font-weight: 600; flex: 1; }
         .special-gerais-correct { color: var(--green); font-weight: 800; }
         .special-gerais-pts { font-size: 0.78rem; font-weight: 800; padding: 2px 8px; border-radius: 10px; background: #d4edda; color: var(--green-dark); }
-
         .rules-container { max-width: 800px; margin: 0 auto; }
         .rules-hero { background: var(--blue); border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 24px; }
         .rules-hero h1 { font-size: 1.8rem; font-weight: 900; color: var(--yellow); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
@@ -260,7 +255,6 @@
         .pts-red { background: #ffeaea; color: var(--error); }
         .rules-warning { background: var(--yellow-light); border: 2px solid var(--yellow); border-radius: 10px; padding: 14px 18px; margin-top: 12px; font-size: 0.88rem; color: var(--blue); font-weight: 600; line-height: 1.6; }
         .rules-warning strong { color: var(--error); }
-
         .admin-container { max-width: 900px; margin: 0 auto; }
         .admin-tabs { display: flex; gap: 4px; background: var(--white); border-radius: 12px; padding: 6px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); overflow-x: auto; }
         .admin-tab { padding: 9px 18px; border-radius: 8px; border: none; background: transparent; color: var(--gray-dark); font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.2s; white-space: nowrap; text-transform: uppercase; }
@@ -315,7 +309,6 @@
         .admin-special-item label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--gray-dark); text-transform: uppercase; margin-bottom: 5px; }
         .admin-special-item input, .admin-special-item select { width: 100%; padding: 9px 12px; border: 2px solid var(--gray); border-radius: 7px; font-size: 0.9rem; outline: none; color: var(--black); background: var(--white); }
         .admin-special-note { font-size: 0.78rem; color: var(--gray-dark); font-style: italic; margin-bottom: 12px; line-height: 1.5; }
-
         .bracket-info { background: var(--yellow-light); border: 2px solid var(--yellow); border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; font-size: 0.88rem; color: var(--blue); line-height: 1.6; }
         .bracket-match-row { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-radius: 10px; margin-bottom: 8px; background: var(--gray-light); }
         .bracket-match-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -327,7 +320,6 @@
         .bracket-save-btn { background: var(--blue); color: var(--yellow); border: none; padding: 6px 14px; border-radius: 7px; font-size: 0.78rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
         .bracket-auto-badge { font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: #d4edda; color: var(--green-dark); white-space: nowrap; }
         .bracket-manual-badge { font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: #d1ecf1; color: #0c5460; white-space: nowrap; }
-
         @media (max-width: 600px) {
             .auth-card { padding: 28px 20px; }
             .auth-logo .title { font-size: 1.7rem; }
@@ -342,14 +334,10 @@
     </style>
 </head>
 <body>
-
-<!-- ═══ LOADING ═══ -->
 <div id="screen-loading" class="loading-screen">
     <div class="loading-spinner"></div>
     <div class="loading-text">Carregando...</div>
 </div>
-
-<!-- ═══ LOGIN ═══ -->
 <div id="screen-login" class="auth-container" style="display:none;">
     <div class="auth-logo">
         <div class="title">Bolão <span>Campeão</span> 2026</div>
@@ -373,8 +361,6 @@
         <button class="btn-secondary" onclick="showScreen('screen-register')">Criar conta</button>
     </div>
 </div>
-
-<!-- ═══ REGISTRO ═══ -->
 <div id="screen-register" class="auth-container" style="display:none;">
     <div class="auth-logo">
         <div class="title">Bolão <span>Campeão</span> 2026</div>
@@ -402,23 +388,18 @@
         <button class="btn-secondary" onclick="showScreen('screen-login')">Já tenho conta</button>
     </div>
 </div>
-
-<!-- ═══ ESPERA ═══ -->
 <div id="screen-waiting" style="display:none;">
     <div class="waiting-screen">
         <div class="waiting-card">
             <div class="trophy">🏆</div>
             <h2>Conta criada com sucesso!</h2>
-            <p>Você está registrado no <strong>Bolão Campeão 2026</strong>.<br>
-            Aguarde o administrador te adicionar a um grupo para começar!</p>
+            <p>Você está registrado no <strong>Bolão Campeão 2026</strong>.<br>Aguarde o administrador te adicionar a um grupo para começar!</p>
             <div class="username-display" id="waiting-username-display">@usuario</div>
             <br>
             <button class="logout-btn" onclick="doLogout()">Sair da conta</button>
         </div>
     </div>
 </div>
-
-<!-- ═══ APP ═══ -->
 <div id="screen-app" style="display:none;">
     <div class="top-bar">
         <div class="logo">Bolão <span>Campeão</span> 2026</div>
@@ -450,7 +431,6 @@
         <div id="page-admin" style="display:none;"></div>
     </div>
 </div>
-
 <div class="modal-overlay" id="modal-overlay" style="display:none;">
     <div class="modal-box">
         <div class="modal-icon" id="modal-icon">🗑️</div>
@@ -462,20 +442,12 @@
         </div>
     </div>
 </div>
-
 <div class="toast" id="toast"></div>
-
 <script>
-// ═══════════════════════════════════════════
-// SUPABASE CONFIG
-// ═══════════════════════════════════════════
 const SUPABASE_URL = 'https://unwzhckrixezlasrubrz.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVud3poY2tyaXhlemxhc3J1YnJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4Mzg3NTMsImV4cCI6MjA5NTQxNDc1M30.0Uvq8IKScxllO8ID7hwCkxIMs7Twmrqj0g81RrV_HV8';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ═══════════════════════════════════════════
-// ESTADO GLOBAL
-// ═══════════════════════════════════════════
 let currentUser = null;
 let allUsers = {};
 let allGroups = {};
@@ -489,9 +461,6 @@ let activeGroupId = null;
 let geraisActiveGroupId = null;
 let adminActiveTab = 'tab-hoje';
 
-// ═══════════════════════════════════════════
-// LISTA DE ARTILHEIROS
-// ═══════════════════════════════════════════
 const SCORER_LIST = [
     'Kylian Mbappé','Harry Kane','Erling Haaland','Vinícius Júnior','Lionel Messi',
     'Lautaro Martínez','Jude Bellingham','Cristiano Ronaldo','Bukayo Saka','Jamal Musiala',
@@ -505,20 +474,11 @@ const SCORER_LIST = [
 
 function scorerDropdownHTML(id, currentValue, disabled) {
     const isOther = currentValue && !SCORER_LIST.includes(currentValue);
-    let html = `<select id="${id}" ${disabled?'disabled':''} onchange="onScorerChange('${id}')">
-        <option value="">Selecionar jogador...</option>`;
-    SCORER_LIST.forEach(name => {
-        html += `<option value="${name}" ${currentValue===name?'selected':''}>${name}</option>`;
-    });
+    let html = `<select id="${id}" ${disabled?'disabled':''} onchange="onScorerChange('${id}')"><option value="">Selecionar jogador...</option>`;
+    SCORER_LIST.forEach(name => { html += `<option value="${name}" ${currentValue===name?'selected':''}>${name}</option>`; });
     html += `<option value="__outro__" ${isOther?'selected':''}>Outro...</option></select>`;
-    html += `<input type="text" class="scorer-other-input" id="${id}-other"
-        placeholder="Nome completo como conhecido no futebol"
-        value="${isOther?currentValue:''}"
-        ${disabled?'disabled':''}
-        style="${isOther?'':'display:none;'}">
-    <div class="scorer-other-note" id="${id}-other-note" style="${isOther?'':'display:none;'}">
-        ⚠️ Escreva o nome exatamente como é reconhecido mundialmente no futebol.
-    </div>`;
+    html += `<input type="text" class="scorer-other-input" id="${id}-other" placeholder="Nome completo como conhecido no futebol" value="${isOther?currentValue:''}" ${disabled?'disabled':''} style="${isOther?'':'display:none;}">
+    <div class="scorer-other-note" id="${id}-other-note" style="${isOther?'':'display:none;'}">⚠️ Escreva o nome exatamente como é reconhecido mundialmente no futebol.</div>`;
     return html;
 }
 
@@ -539,16 +499,10 @@ function onScorerChange(id) {
 function getScorerValue(id) {
     const select = document.getElementById(id);
     if (!select) return '';
-    if (select.value === '__outro__') {
-        const other = document.getElementById(id+'-other');
-        return other ? other.value.trim() : '';
-    }
+    if (select.value === '__outro__') { const other = document.getElementById(id+'-other'); return other ? other.value.trim() : ''; }
     return select.value;
 }
 
-// ═══════════════════════════════════════════
-// DADOS DOS JOGOS
-// ═══════════════════════════════════════════
 const MATCHES = [
   { id:'g001', phase:'Grupos', round:'Rodada 1', date:'2026-06-11', group:'A', home:'México', homeFlag:'🇲🇽', away:'África do Sul', awayFlag:'🇿🇦' },
   { id:'g002', phase:'Grupos', round:'Rodada 1', date:'2026-06-11', group:'A', home:'República da Coreia', homeFlag:'🇰🇷', away:'República Tcheca', awayFlag:'🇨🇿' },
@@ -673,9 +627,6 @@ const FLAG_MAP = {
 const ADMIN_USERNAME = 'admin';
 const CUP_START = '2026-06-11';
 
-// ═══════════════════════════════════════════
-// DATAS — FUSO BRASÍLIA
-// ═══════════════════════════════════════════
 function getTodayStr() {
     const now = new Date();
     const brasiliaOffset = -3 * 60;
@@ -697,9 +648,6 @@ function formatDateBR(dateStr) {
     return `${days[dt.getDay()]}, ${parseInt(d)} ${months[parseInt(m)-1]} ${y}`;
 }
 
-// ═══════════════════════════════════════════
-// SUPABASE — CARREGAR TODOS OS DADOS
-// ═══════════════════════════════════════════
 async function loadAllData() {
     try {
         const [usersRes, groupsRes, membersRes, picksRes, specialPicksRes, resultsRes, matchDataRes, standingsRes, specialResultsRes] = await Promise.all([
@@ -713,80 +661,54 @@ async function loadAllData() {
             sb.from('group_standings').select('*'),
             sb.from('special_results').select('*').eq('id', 1).single(),
         ]);
-
-        // Usuários
         allUsers = {};
         (usersRes.data || []).forEach(u => { allUsers[u.username] = u; });
-
-        // Grupos
         allGroups = {};
-        (groupsRes.data || []).forEach(g => {
-            allGroups[g.id] = { ...g, members: [] };
-        });
-        (membersRes.data || []).forEach(m => {
-            if (allGroups[m.group_id]) allGroups[m.group_id].members.push(m.username);
-        });
-
-        // Palpites — organiza por username
+        (groupsRes.data || []).forEach(g => { allGroups[g.id] = { ...g, members: [] }; });
+        (membersRes.data || []).forEach(m => { if (allGroups[m.group_id]) allGroups[m.group_id].members.push(m.username); });
         allPicks = {};
         (picksRes.data || []).forEach(p => {
             if (!allPicks[p.username]) allPicks[p.username] = {};
-            allPicks[p.username][p.match_id] = {
-                home: p.home_score,
-                away: p.away_score,
-                draw: p.is_draw,
-                penWinner: p.pen_winner,
-                jdr: p.is_jdr
-            };
+            allPicks[p.username][p.match_id] = { home: p.home_score, away: p.away_score, draw: p.is_draw, penWinner: p.pen_winner, jdr: p.is_jdr };
         });
-
-        // Palpites especiais
         allSpecialPicks = {};
         (specialPicksRes.data || []).forEach(s => {
-            allSpecialPicks[s.username] = {
-                topScorer: s.top_scorer,
-                champion: s.champion,
-                runnerUp: s.runner_up,
-                bestAttack: s.best_attack
-            };
+            allSpecialPicks[s.username] = { topScorer: s.top_scorer, champion: s.champion, runnerUp: s.runner_up, bestAttack: s.best_attack };
         });
-
-        // Resultados
         allResults = {};
-        (resultsRes.data || []).forEach(r => {
-            allResults[r.match_id] = { home: r.home_score, away: r.away_score, penWinner: r.pen_winner };
-        });
-
-        // Dados do mata-mata
+        (resultsRes.data || []).forEach(r => { allResults[r.match_id] = { home: r.home_score, away: r.away_score, penWinner: r.pen_winner }; });
         matchData = {};
-        (matchDataRes.data || []).forEach(m => {
-            matchData[m.match_id] = { home: m.home, homeFlag: m.home_flag, away: m.away, awayFlag: m.away_flag };
-        });
-
-        // Classificação manual
+        (matchDataRes.data || []).forEach(m => { matchData[m.match_id] = { home: m.home, homeFlag: m.home_flag, away: m.away, awayFlag: m.away_flag }; });
         groupStandings = {};
-        (standingsRes.data || []).forEach(s => {
-            groupStandings[s.group_letter] = s.standings;
-        });
-
-        // Resultados especiais
+        (standingsRes.data || []).forEach(s => { groupStandings[s.group_letter] = s.standings; });
         specialResults = specialResultsRes.data || {};
-
-        // Aplica chaveamento automático
         applyAutoMatchData();
-
-    } catch (e) {
-        console.error('Erro ao carregar dados:', e);
-    }
+    } catch (e) { console.error('Erro ao carregar dados:', e); }
 }
 
-// ═══════════════════════════════════════════
-// SUPABASE — SALVAR PALPITE
-// ═══════════════════════════════════════════
 async function savePick(username, matchId, pick) {
+    if (pick.jdr === true) {
+        const thisMatch = MATCHES.find(m => m.id === matchId);
+        if (thisMatch) {
+            const sameRound = MATCHES.filter(m => m.round === thisMatch.round && m.id !== matchId);
+            for (const m of sameRound) {
+                const existingPick = allPicks[username] && allPicks[username][m.id];
+                if (existingPick && existingPick.jdr === true) {
+                    existingPick.jdr = false;
+                    await sb.from('picks').upsert({
+                        username, match_id: m.id,
+                        home_score: existingPick.home !== undefined ? existingPick.home : null,
+                        away_score: existingPick.away !== undefined ? existingPick.away : null,
+                        is_draw: existingPick.draw || false,
+                        pen_winner: existingPick.penWinner || null,
+                        is_jdr: false
+                    }, { onConflict: 'username,match_id' });
+                }
+            }
+        }
+    }
     const { error } = await sb.from('picks').upsert({
-        username,
-        match_id: matchId,
+        username, match_id: matchId,
         home_score: pick.home !== undefined ? pick.home : null,
         away_score: pick.away !== undefined ? pick.away : null,
         is_draw: pick.draw || false,
@@ -806,25 +728,16 @@ async function deletePick(username, matchId) {
 
 async function saveSpecialPick(username, special) {
     const { error } = await sb.from('special_picks').upsert({
-        username,
-        top_scorer: special.topScorer || null,
-        champion: special.champion || null,
-        runner_up: special.runnerUp || null,
-        best_attack: special.bestAttack || null
+        username, top_scorer: special.topScorer || null, champion: special.champion || null,
+        runner_up: special.runnerUp || null, best_attack: special.bestAttack || null
     }, { onConflict: 'username' });
     if (error) { console.error('Erro ao salvar especiais:', error); throw error; }
     allSpecialPicks[username] = special;
 }
 
-// ═══════════════════════════════════════════
-// SUPABASE — RESULTADOS (ADMIN)
-// ═══════════════════════════════════════════
 async function saveResult(matchId, result) {
     const { error } = await sb.from('results').upsert({
-        match_id: matchId,
-        home_score: result.home,
-        away_score: result.away,
-        pen_winner: result.penWinner || null
+        match_id: matchId, home_score: result.home, away_score: result.away, pen_winner: result.penWinner || null
     }, { onConflict: 'match_id' });
     if (error) { console.error('Erro ao salvar resultado:', error); throw error; }
     allResults[matchId] = result;
@@ -840,11 +753,7 @@ async function deleteResult(matchId) {
 
 async function saveMatchDataDB(matchId, data) {
     const { error } = await sb.from('match_data').upsert({
-        match_id: matchId,
-        home: data.home,
-        home_flag: data.homeFlag || '',
-        away: data.away,
-        away_flag: data.awayFlag || ''
+        match_id: matchId, home: data.home, home_flag: data.homeFlag || '', away: data.away, away_flag: data.awayFlag || ''
     }, { onConflict: 'match_id' });
     if (error) { console.error('Erro ao salvar match_data:', error); throw error; }
     matchData[matchId] = data;
@@ -858,21 +767,15 @@ async function deleteMatchData(matchId) {
 
 async function saveSpecialResultsDB(sr) {
     const { error } = await sb.from('special_results').upsert({
-        id: 1,
-        top_scorer: sr.topScorer || null,
-        champion: sr.champion || null,
-        runner_up: sr.runnerUp || null,
-        best_attack: sr.bestAttack || null
+        id: 1, top_scorer: sr.top_scorer || null, champion: sr.champion || null,
+        runner_up: sr.runner_up || null, best_attack: sr.best_attack || null
     }, { onConflict: 'id' });
     if (error) { console.error('Erro ao salvar resultados especiais:', error); throw error; }
     specialResults = sr;
 }
 
 async function saveGroupStandingsDB(groupLetter, standings) {
-    const { error } = await sb.from('group_standings').upsert({
-        group_letter: groupLetter,
-        standings: standings
-    }, { onConflict: 'group_letter' });
+    const { error } = await sb.from('group_standings').upsert({ group_letter: groupLetter, standings }, { onConflict: 'group_letter' });
     if (error) { console.error('Erro ao salvar classificação:', error); throw error; }
     groupStandings[groupLetter] = standings;
 }
@@ -883,9 +786,6 @@ async function deleteGroupStandingsDB(groupLetter) {
     delete groupStandings[groupLetter];
 }
 
-// ═══════════════════════════════════════════
-// SUPABASE — GRUPOS (ADMIN)
-// ═══════════════════════════════════════════
 async function createGroup(id, name) {
     const { error } = await sb.from('groups').insert({ id, name });
     if (error) { console.error('Erro ao criar grupo:', error); throw error; }
@@ -910,30 +810,16 @@ async function removeMemberFromGroup(groupId, username) {
     if (allGroups[groupId]) allGroups[groupId].members = allGroups[groupId].members.filter(u => u !== username);
 }
 
-// ═══════════════════════════════════════════
-// SUPABASE — USUÁRIOS
-// ═══════════════════════════════════════════
 async function deleteUserDB(username) {
-    // Remove de grupos
-    const { error: e1 } = await sb.from('group_members').delete().eq('username', username);
-    // Remove palpites
-    const { error: e2 } = await sb.from('picks').delete().eq('username', username);
-    // Remove especiais
-    const { error: e3 } = await sb.from('special_picks').delete().eq('username', username);
-    // Remove usuário
-    const { error: e4 } = await sb.from('users').delete().eq('username', username);
-    if (e4) { console.error('Erro ao deletar usuário:', e4); throw e4; }
-    delete allUsers[username];
-    delete allPicks[username];
-    delete allSpecialPicks[username];
-    Object.keys(allGroups).forEach(gId => {
-        allGroups[gId].members = allGroups[gId].members.filter(u => u !== username);
-    });
+    await sb.from('group_members').delete().eq('username', username);
+    await sb.from('picks').delete().eq('username', username);
+    await sb.from('special_picks').delete().eq('username', username);
+    const { error } = await sb.from('users').delete().eq('username', username);
+    if (error) { console.error('Erro ao deletar usuário:', error); throw error; }
+    delete allUsers[username]; delete allPicks[username]; delete allSpecialPicks[username];
+    Object.keys(allGroups).forEach(gId => { allGroups[gId].members = allGroups[gId].members.filter(u => u !== username); });
 }
 
-// ═══════════════════════════════════════════
-// PONTUAÇÃO
-// ═══════════════════════════════════════════
 function calcPoints(pick, result, isJDR, isKnockout) {
     if (!pick || pick.home === undefined || pick.away === undefined) return 0;
     if (!result || result.home === undefined || result.away === undefined) return 0;
@@ -956,8 +842,7 @@ function calcPoints(pick, result, isJDR, isKnockout) {
             const rWin = rH > rA ? 'home' : 'away';
             if (pWin === rWin) {
                 correctResult = true;
-                if (pH === rH && pA === rA) { exactScore = true; pts = 5; }
-                else pts = 3;
+                if (pH === rH && pA === rA) { exactScore = true; pts = 5; } else pts = 3;
             }
         }
     } else {
@@ -965,14 +850,10 @@ function calcPoints(pick, result, isJDR, isKnockout) {
         const rResult = rH > rA ? 'home' : rH < rA ? 'away' : 'draw';
         if (pResult === rResult) {
             correctResult = true;
-            if (pH === rH && pA === rA) { exactScore = true; pts = 5; }
-            else pts = 3;
+            if (pH === rH && pA === rA) { exactScore = true; pts = 5; } else pts = 3;
         }
     }
-    if (isJDR) {
-        if (exactScore || correctResult) pts = pts * 2;
-        else pts = -5;
-    }
+    if (isJDR) { if (exactScore || correctResult) pts = pts * 2; else pts = -5; }
     return pts;
 }
 
@@ -985,15 +866,9 @@ function getPointsBadgeClass(pts) {
 
 function calcSpecialPoints(special, sr) {
     let total = 0;
-    const cats = [
-        { key: 'topScorer', pts: 15 },
-        { key: 'champion', pts: 20 },
-        { key: 'runnerUp', pts: 15 },
-        { key: 'bestAttack', pts: 15 },
-    ];
-    cats.forEach(cat => {
-        const result = sr[cat.key];
-        const pick = special[cat.key] || '';
+    [{ key:'top_scorer', pts:15, specialKey:'topScorer' }, { key:'champion', pts:20, specialKey:'champion' },
+     { key:'runner_up', pts:15, specialKey:'runnerUp' }, { key:'best_attack', pts:15, specialKey:'bestAttack' }].forEach(cat => {
+        const result = sr[cat.key]; const pick = special[cat.specialKey] || '';
         if (!result || !pick) return;
         const winners = Array.isArray(result) ? result : [result];
         if (winners.some(w => w.toLowerCase() === pick.toLowerCase())) total += cat.pts;
@@ -1016,9 +891,6 @@ function calcUserTotal(username) {
     return total;
 }
 
-// ═══════════════════════════════════════════
-// CLASSIFICAÇÃO DOS GRUPOS
-// ═══════════════════════════════════════════
 function calcGroupStandings() {
     const standings = {};
     const GROUPS = ['A','B','C','D','E','F','G','H','I','J','K','L'];
@@ -1049,9 +921,6 @@ function calcGroupStandings() {
     return sorted;
 }
 
-// ═══════════════════════════════════════════
-// CHAVEAMENTO AUTOMÁTICO
-// ═══════════════════════════════════════════
 function getMatchWinner(matchId, getLooser) {
     const md = matchData[matchId];
     if (md && md.home && md.away) {
@@ -1089,11 +958,7 @@ function getBest3rd(groups) {
         return teams[2] ? { ...teams[2], group: g } : null;
     }).filter(Boolean);
     if (thirds.length === 0) return null;
-    thirds.sort((a,b) => {
-        if (b.pts !== a.pts) return b.pts - a.pts;
-        if (b.gd !== a.gd) return b.gd - a.gd;
-        return b.gf - a.gf;
-    });
+    thirds.sort((a,b) => { if (b.pts !== a.pts) return b.pts - a.pts; if (b.gd !== a.gd) return b.gd - a.gd; return b.gf - a.gf; });
     return thirds[0] ? { name: thirds[0].name, flag: thirds[0].flag || '' } : null;
 }
 
@@ -1158,14 +1023,9 @@ function getAutoMatchData() {
 
 function applyAutoMatchData() {
     const auto = getAutoMatchData();
-    Object.entries(auto).forEach(([id, data]) => {
-        if (!matchData[id] || !matchData[id].home) matchData[id] = data;
-    });
+    Object.entries(auto).forEach(([id, data]) => { if (!matchData[id] || !matchData[id].home) matchData[id] = data; });
 }
 
-// ═══════════════════════════════════════════
-// MODAL
-// ═══════════════════════════════════════════
 let modalCallback = null;
 function showModal(title, msg, icon, onConfirm) {
     document.getElementById('modal-title').textContent = title;
@@ -1177,22 +1037,17 @@ function showModal(title, msg, icon, onConfirm) {
 function closeModal() { document.getElementById('modal-overlay').style.display = 'none'; modalCallback = null; }
 function confirmModal() { if (modalCallback) modalCallback(); closeModal(); }
 
-// ═══════════════════════════════════════════
-// UI
-// ═══════════════════════════════════════════
 function showScreen(id) {
     ['screen-loading','screen-login','screen-register','screen-waiting','screen-app'].forEach(s => {
-        const el = document.getElementById(s);
-        if (el) el.style.display = 'none';
+        const el = document.getElementById(s); if (el) el.style.display = 'none';
     });
     const target = document.getElementById(id);
-    if (target) target.style.display = (id === 'screen-app') ? 'block' : (id === 'screen-loading' ? 'flex' : 'flex');
+    if (target) target.style.display = (id === 'screen-app') ? 'block' : 'flex';
 }
 
 function showPage(pageId, btn) {
     ['page-bolao','page-palpites','page-hoje','page-resultados','page-gerais','page-regras','page-admin'].forEach(p => {
-        const el = document.getElementById(p);
-        if (el) el.style.display = 'none';
+        const el = document.getElementById(p); if (el) el.style.display = 'none';
     });
     const target = document.getElementById(pageId);
     if (target) target.style.display = 'block';
@@ -1222,9 +1077,6 @@ function showError(id, msg) {
     if (el) { el.textContent = msg; el.classList.add('show'); el.style.display='block'; }
 }
 
-// ═══════════════════════════════════════════
-// AUTH
-// ═══════════════════════════════════════════
 async function doLogin() {
     clearErrors('login-username-err','login-password-err','login-general-err');
     const username = document.getElementById('login-username').value.trim().toLowerCase();
@@ -1233,10 +1085,8 @@ async function doLogin() {
     if (!username) { showError('login-username-err','Informe seu nome de usuário.'); valid = false; }
     if (!password) { showError('login-password-err','Informe sua senha.'); valid = false; }
     if (!valid) return;
-
     const btn = document.getElementById('login-btn');
     btn.disabled = true; btn.textContent = 'Entrando...';
-
     try {
         await loadAllData();
         const user = allUsers[username];
@@ -1245,11 +1095,8 @@ async function doLogin() {
         currentUser = username;
         localStorage.setItem('bc26_user', username);
         loadApp(username);
-    } catch(e) {
-        showError('login-general-err','Erro de conexão. Tente novamente.');
-    } finally {
-        btn.disabled = false; btn.textContent = 'Entrar';
-    }
+    } catch(e) { showError('login-general-err','Erro de conexão. Tente novamente.'); }
+    finally { btn.disabled = false; btn.textContent = 'Entrar'; }
 }
 
 async function doRegister() {
@@ -1267,10 +1114,8 @@ async function doRegister() {
     if (!password2) { showError('reg-password2-err','Confirme sua senha.'); valid = false; }
     else if (password !== password2) { showError('reg-password2-err','As senhas não coincidem.'); valid = false; }
     if (!valid) return;
-
     const btn = document.getElementById('register-btn');
     btn.disabled = true; btn.textContent = 'Criando conta...';
-
     try {
         await loadAllData();
         if (allUsers[username]) { showError('reg-username-err','Este usuário já existe.'); return; }
@@ -1281,11 +1126,8 @@ async function doRegister() {
         localStorage.setItem('bc26_user', username);
         showToast('Conta criada com sucesso!', 'success');
         loadApp(username);
-    } catch(e) {
-        showError('reg-username-err','Erro de conexão. Tente novamente.');
-    } finally {
-        btn.disabled = false; btn.textContent = 'Criar Conta';
-    }
+    } catch(e) { showError('reg-username-err','Erro de conexão. Tente novamente.'); }
+    finally { btn.disabled = false; btn.textContent = 'Criar Conta'; }
 }
 
 function doLogout() {
@@ -1299,7 +1141,6 @@ function doLogout() {
 function loadApp(username) {
     const user = allUsers[username];
     if (!user) { doLogout(); return; }
-
     if (user.is_admin) {
         showScreen('screen-app');
         document.getElementById('app-username-display').textContent = '@' + username;
@@ -1308,15 +1149,12 @@ function loadApp(username) {
         renderBolao();
         return;
     }
-
-    // Verifica se está em algum grupo
     const userGroups = Object.values(allGroups).filter(g => g.members.includes(username));
     if (userGroups.length === 0) {
         showScreen('screen-waiting');
         document.getElementById('waiting-username-display').textContent = '@' + username;
         return;
     }
-
     showScreen('screen-app');
     document.getElementById('app-username-display').textContent = '@' + username;
     document.getElementById('nav-admin-btn').style.display = 'none';
@@ -1327,9 +1165,7 @@ function loadApp(username) {
 function setupGroupSelector(username) {
     const user = allUsers[username];
     const isAdmin = user && user.is_admin;
-    const userGroups = isAdmin
-        ? Object.values(allGroups)
-        : Object.values(allGroups).filter(g => g.members.includes(username));
+    const userGroups = isAdmin ? Object.values(allGroups) : Object.values(allGroups).filter(g => g.members.includes(username));
     const selector = document.getElementById('group-selector');
     const tabs = document.getElementById('group-tabs');
     tabs.innerHTML = '';
@@ -1339,9 +1175,7 @@ function setupGroupSelector(username) {
         return;
     }
     selector.style.display = 'flex';
-    if (!activeGroupId || !userGroups.find(g => g.id === activeGroupId)) {
-        activeGroupId = userGroups[0].id;
-    }
+    if (!activeGroupId || !userGroups.find(g => g.id === activeGroupId)) activeGroupId = userGroups[0].id;
     userGroups.forEach(group => {
         const tab = document.createElement('button');
         tab.className = 'group-tab' + (group.id === activeGroupId ? ' active' : '');
@@ -1356,9 +1190,6 @@ function setupGroupSelector(username) {
     });
 }
 
-// ═══════════════════════════════════════════
-// MATCH HELPERS
-// ═══════════════════════════════════════════
 function getMatchDisplay(match) {
     if (match.phase !== 'Grupos') {
         const data = matchData[match.id];
@@ -1368,33 +1199,21 @@ function getMatchDisplay(match) {
     return match;
 }
 
-// ═══════════════════════════════════════════
-// RENDER ESPECIAIS
-// ═══════════════════════════════════════════
 function renderSpecialSection(special, cupStarted, prefix) {
     const locked = cupStarted;
     let html = `<div class="special-section"><h3>🌟 Palpites Especiais</h3>`;
     if (locked) html += `<p class="special-locked-msg">⚠️ A Copa já começou. Estes palpites não podem mais ser alterados.</p>`;
     html += `<div class="special-grid">
-        <div class="special-item">
-            <label>🥇 Artilheiro</label>
-            ${scorerDropdownHTML(prefix+'sp-top-scorer', special.topScorer||'', locked)}
-        </div>
-        <div class="special-item"><label>🏆 Campeão</label>
-            <input type="text" id="${prefix}sp-champion" placeholder="Seleção" value="${special.champion||''}" ${locked?'disabled':''}></div>
-        <div class="special-item"><label>🥈 Vice-Campeão</label>
-            <input type="text" id="${prefix}sp-runner-up" placeholder="Seleção" value="${special.runnerUp||''}" ${locked?'disabled':''}></div>
-        <div class="special-item"><label>⚡ Melhor Ataque</label>
-            <input type="text" id="${prefix}sp-best-attack" placeholder="Seleção" value="${special.bestAttack||''}" ${locked?'disabled':''}></div>
+        <div class="special-item"><label>🥇 Artilheiro</label>${scorerDropdownHTML(prefix+'sp-top-scorer', special.topScorer||'', locked)}</div>
+        <div class="special-item"><label>🏆 Campeão</label><input type="text" id="${prefix}sp-champion" placeholder="Seleção" value="${special.champion||''}" ${locked?'disabled':''}></div>
+        <div class="special-item"><label>🥈 Vice-Campeão</label><input type="text" id="${prefix}sp-runner-up" placeholder="Seleção" value="${special.runnerUp||''}" ${locked?'disabled':''}></div>
+        <div class="special-item"><label>⚡ Melhor Ataque</label><input type="text" id="${prefix}sp-best-attack" placeholder="Seleção" value="${special.bestAttack||''}" ${locked?'disabled':''}></div>
     </div>`;
     if (!locked) html += `<p style="font-size:0.75rem;color:var(--gray-dark);margin-top:10px;">⚠️ Escreva os nomes de seleções <strong>exatamente como aparecem no site</strong>. Não poderão ser alterados após o início da Copa.</p>`;
     html += `</div>`;
     return html;
 }
 
-// ═══════════════════════════════════════════
-// RENDER CARDS
-// ═══════════════════════════════════════════
 function renderMatchCardEditable(match, pick, isJDR, round, showDelete) {
     const homeVal = (pick.home !== undefined && pick.home !== null) ? pick.home : '';
     const awayVal = (pick.away !== undefined && pick.away !== null) ? pick.away : '';
@@ -1408,14 +1227,9 @@ function renderMatchCardEditable(match, pick, isJDR, round, showDelete) {
                 <option value="">Selecionar</option>
                 <option value="${match.home}" ${pick.penWinner===match.home?'selected':''}>${match.homeFlag} ${match.home}</option>
                 <option value="${match.away}" ${pick.penWinner===match.away?'selected':''}>${match.awayFlag} ${match.away}</option>
-            </select>
-        </div>`;
+            </select></div>`;
     }
-    let jdrRow = `<div class="jdr-row">
-        <button class="jdr-btn ${isJDR?'selected':''}" onclick="toggleJDR('${match.id}','${round}')" id="jdr-btn-${match.id}">
-            ⭐ ${isJDR ? 'Jogo da Rodada ✓' : 'Escolher como Jogo da Rodada'}
-        </button>
-    </div>`;
+    let jdrRow = `<div class="jdr-row"><button class="jdr-btn ${isJDR?'selected':''}" onclick="toggleJDR('${match.id}','${round}')" id="jdr-btn-${match.id}">⭐ ${isJDR ? 'Jogo da Rodada ✓' : 'Escolher como Jogo da Rodada'}</button></div>`;
     return `<div class="match-card ${isJDR?'jogo-da-rodada':''}" id="card-${match.id}">
         ${deleteBtn}${groupBadge}
         <div class="match-teams">
@@ -1455,21 +1269,13 @@ function renderMatchCardReadonly(match, pick, isJDR, showDelete) {
     </div>`;
 }
 
-// ═══════════════════════════════════════════
-// DELETE PALPITES
-// ═══════════════════════════════════════════
 function confirmDeletePick(matchId) {
     const match = MATCHES.find(m => m.id === matchId);
     const display = getMatchDisplay(match);
     const name = display ? `${display.home} x ${display.away}` : `Jogo ${match.matchNum}`;
     showModal('Deletar palpite', `Tem certeza que deseja deletar seu palpite para ${name}?`, '🗑️', async () => {
-        try {
-            await deletePick(currentUser, matchId);
-            showToast('Palpite deletado!', 'success');
-            renderPalpites();
-        } catch(e) {
-            showToast('Erro ao deletar palpite.', 'error');
-        }
+        try { await deletePick(currentUser, matchId); showToast('Palpite deletado!', 'success'); renderPalpites(); }
+        catch(e) { showToast('Erro ao deletar palpite.', 'error'); }
     });
 }
 
@@ -1477,21 +1283,13 @@ function confirmDeleteAll() {
     showModal('Deletar todos os palpites', 'Tem certeza? Todos os palpites de jogos futuros serão removidos.', '⚠️', async () => {
         try {
             const futurePicks = MATCHES.filter(m => !isMatchLocked(m.date));
-            for (const m of futurePicks) {
-                const picks = allPicks[currentUser] || {};
-                if (picks[m.id]) await deletePick(currentUser, m.id);
-            }
+            for (const m of futurePicks) { const picks = allPicks[currentUser] || {}; if (picks[m.id]) await deletePick(currentUser, m.id); }
             showToast('Palpites futuros deletados!', 'success');
             renderPalpites();
-        } catch(e) {
-            showToast('Erro ao deletar palpites.', 'error');
-        }
+        } catch(e) { showToast('Erro ao deletar palpites.', 'error'); }
     });
 }
 
-// ═══════════════════════════════════════════
-// MEU BOLÃO
-// ═══════════════════════════════════════════
 function renderBolao() {
     const container = document.getElementById('page-bolao');
     if (!container) return;
@@ -1513,28 +1311,18 @@ function renderBolao() {
     } else {
         let lastPhase = '';
         const grouped = {};
-        pendingMatches.forEach(m => {
-            const key = m.phase + '||' + m.date;
-            if (!grouped[key]) grouped[key] = [];
-            grouped[key].push(m);
-        });
+        pendingMatches.forEach(m => { const key = m.phase + '||' + m.date; if (!grouped[key]) grouped[key] = []; grouped[key].push(m); });
         Object.keys(grouped).sort((a,b) => a.split('||')[1].localeCompare(b.split('||')[1])).forEach(key => {
             const [phase, date] = key.split('||');
             if (phase !== lastPhase) { html += `<div class="phase-header">🏆 ${phase}</div>`; lastPhase = phase; }
             html += `<div class="day-separator"><span class="day-label">📅 ${formatDateBR(date)}</span><div class="day-line"></div></div>`;
-            grouped[key].forEach(m => {
-                const pick = picks[m.id] || {};
-                html += renderMatchCardEditable(m, pick, pick.jdr===true, m.round, false);
-            });
+            grouped[key].forEach(m => { const pick = picks[m.id] || {}; html += renderMatchCardEditable(m, pick, pick.jdr===true, m.round, false); });
         });
     }
     container.innerHTML = html;
     attachScoreInputHandlers();
 }
 
-// ═══════════════════════════════════════════
-// MEUS PALPITES
-// ═══════════════════════════════════════════
 function renderPalpites() {
     const container = document.getElementById('page-palpites');
     if (!container) return;
@@ -1556,18 +1344,13 @@ function renderPalpites() {
         <div class="page-header-actions">
             ${deletableCount > 0 ? `<button class="delete-all-btn" onclick="confirmDeleteAll()">🗑 Deletar Todos</button>` : ''}
             <button class="save-btn" onclick="savePalpites()">💾 Salvar Alterações</button>
-        </div>
-    </div>`;
+        </div></div>`;
     html += renderSpecialSection(special, cupStarted, 'palpites-');
     if (allMatches.length === 0) {
         html += `<div class="no-matches"><div class="icon">📋</div><p>Você ainda não fez nenhum palpite.</p></div>`;
     } else {
         const grouped = {};
-        allMatches.forEach(m => {
-            const key = m.phase + '||' + m.date;
-            if (!grouped[key]) grouped[key] = [];
-            grouped[key].push(m);
-        });
+        allMatches.forEach(m => { const key = m.phase + '||' + m.date; if (!grouped[key]) grouped[key] = []; grouped[key].push(m); });
         let lastPhase = '';
         Object.keys(grouped).sort((a,b) => a.split('||')[1].localeCompare(b.split('||')[1])).forEach(key => {
             const [phase, date] = key.split('||');
@@ -1584,9 +1367,6 @@ function renderPalpites() {
     attachScoreInputHandlers();
 }
 
-// ═══════════════════════════════════════════
-// HOJE
-// ═══════════════════════════════════════════
 function renderHoje() {
     const container = document.getElementById('page-hoje');
     if (!container) return;
@@ -1621,9 +1401,6 @@ function renderHoje() {
     container.innerHTML = html;
 }
 
-// ═══════════════════════════════════════════
-// MEUS RESULTADOS
-// ═══════════════════════════════════════════
 function renderResultados() {
     const container = document.getElementById('page-resultados');
     if (!container) return;
@@ -1652,8 +1429,7 @@ function renderResultados() {
     let html = `<div class="page-header"><h2>🏅 Meus Resultados</h2></div>`;
     if (doneMatches.length === 0 && !hasAnySpecialResult) {
         html += `<div class="no-matches"><div class="icon">⏳</div><p>Nenhum resultado disponível ainda.</p></div>`;
-        container.innerHTML = html;
-        return;
+        container.innerHTML = html; return;
     }
     html += `<div class="result-summary">
         <div><div class="summary-label">Total de Pontos</div><div class="summary-pts">${totalPts}</div>
@@ -1662,11 +1438,7 @@ function renderResultados() {
     </div>`;
     if (doneMatches.length > 0) {
         const grouped = {};
-        doneMatches.forEach(m => {
-            const key = m.phase + '||' + m.date;
-            if (!grouped[key]) grouped[key] = [];
-            grouped[key].push(m);
-        });
+        doneMatches.forEach(m => { const key = m.phase + '||' + m.date; if (!grouped[key]) grouped[key] = []; grouped[key].push(m); });
         let lastPhase = '';
         Object.keys(grouped).sort((a,b) => a.split('||')[1].localeCompare(b.split('||')[1])).forEach(key => {
             const [phase, date] = key.split('||');
@@ -1719,10 +1491,7 @@ function renderResultados() {
                 <div class="special-result-left">
                     <div class="special-result-category">${cat.label} · ${cat.pts} pts</div>
                     <div class="special-result-real">Resultado: <strong>${resultDisplay}</strong></div>
-                    ${userPick
-                        ? `<div class="special-result-pick ${isCorrect?'correct':''}">Seu palpite: <strong>${userPick}</strong>${isCorrect?' ✓':''}</div>`
-                        : `<div class="special-result-no-pick">Sem palpite registrado</div>`
-                    }
+                    ${userPick ? `<div class="special-result-pick ${isCorrect?'correct':''}">Seu palpite: <strong>${userPick}</strong>${isCorrect?' ✓':''}</div>` : `<div class="special-result-no-pick">Sem palpite registrado</div>`}
                 </div>
                 <span class="result-points-badge ${badgeClass}">${earnedPts>=0?'+':''}${earnedPts} pts</span>
             </div>`;
@@ -1732,9 +1501,6 @@ function renderResultados() {
     container.innerHTML = html;
 }
 
-// ═══════════════════════════════════════════
-// RESULTADOS GERAIS
-// ═══════════════════════════════════════════
 function getGeraisGroups() {
     const user = allUsers[currentUser];
     const isAdmin = user && user.is_admin;
@@ -1756,16 +1522,10 @@ function renderGerais() {
     let html = `<div class="page-header"><h2>🏆 Resultados Gerais</h2></div>`;
     if (allGroupsList.length > 1) {
         html += `<div class="gerais-group-selector"><span>Liga:</span>`;
-        allGroupsList.forEach(g => {
-            html += `<button class="gerais-group-btn ${g.id===geraisActiveGroupId?'active':''}" onclick="setGeraisGroup('${g.id}')">${g.name||g.id}</button>`;
-        });
+        allGroupsList.forEach(g => { html += `<button class="gerais-group-btn ${g.id===geraisActiveGroupId?'active':''}" onclick="setGeraisGroup('${g.id}')">${g.name||g.id}</button>`; });
         html += `</div>`;
     }
-    if (members.length === 0) {
-        html += `<div class="no-matches"><div class="icon">👥</div><p>Nenhum membro neste grupo ainda.</p></div>`;
-        container.innerHTML = html;
-        return;
-    }
+    if (members.length === 0) { html += `<div class="no-matches"><div class="icon">👥</div><p>Nenhum membro neste grupo ainda.</p></div>`; container.innerHTML = html; return; }
     const cupStarted = isCupStarted();
     const leaderboard = members.map(u => ({ username: u, total: calcUserTotal(u) })).sort((a,b) => b.total - a.total);
     html += `<div class="leaderboard-card"><h3>🥇 Classificação — ${activeGroup.name||activeGroup.id}</h3>`;
@@ -1790,11 +1550,7 @@ function renderGerais() {
     });
     if (doneMatches.length > 0) {
         const grouped = {};
-        doneMatches.forEach(m => {
-            const key = m.phase + '||' + m.date;
-            if (!grouped[key]) grouped[key] = [];
-            grouped[key].push(m);
-        });
+        doneMatches.forEach(m => { const key = m.phase + '||' + m.date; if (!grouped[key]) grouped[key] = []; grouped[key].push(m); });
         let lastPhase = '';
         Object.keys(grouped).sort((a,b) => a.split('||')[1].localeCompare(b.split('||')[1])).forEach(key => {
             const [phase, date] = key.split('||');
@@ -1836,12 +1592,10 @@ function renderGerais() {
     }
     if (cupStarted) {
         html += `<div class="special-gerais-section"><h3>🌟 Palpites Especiais</h3>`;
-        [
-            { key:'top_scorer', specialKey:'topScorer', label:'🥇 Artilheiro', pts:15 },
-            { key:'champion', specialKey:'champion', label:'🏆 Campeão', pts:20 },
-            { key:'runner_up', specialKey:'runnerUp', label:'🥈 Vice-Campeão', pts:15 },
-            { key:'best_attack', specialKey:'bestAttack', label:'⚡ Melhor Ataque', pts:15 }
-        ].forEach(cat => {
+        [{ key:'top_scorer', specialKey:'topScorer', label:'🥇 Artilheiro', pts:15 },
+         { key:'champion', specialKey:'champion', label:'🏆 Campeão', pts:20 },
+         { key:'runner_up', specialKey:'runnerUp', label:'🥈 Vice-Campeão', pts:15 },
+         { key:'best_attack', specialKey:'bestAttack', label:'⚡ Melhor Ataque', pts:15 }].forEach(cat => {
             html += `<div class="special-gerais-category"><h4>${cat.label} · ${cat.pts} pts</h4>`;
             [...members].sort().forEach(u => {
                 const uSpecial = allSpecialPicks[u] || {};
@@ -1853,7 +1607,7 @@ function renderGerais() {
                 html += `<div class="special-gerais-row">
                     <span class="special-gerais-name">@${u}${isMe?' <span style="font-size:0.68rem;color:var(--gray-dark);">(você)</span>':''}</span>
                     <span class="special-gerais-value ${isCorrect?'special-gerais-correct':''}">${value||'<em style="color:var(--gray-dark)">sem palpite</em>'}</span>
-                    ${isCorrect?`<span class="special-gerais-pts">+${cat.pts}pts</span>`:''}
+                    ${isCorrect ? `<span class="special-gerais-pts">+${cat.pts}pts</span>` : ''}
                 </div>`;
             });
             html += `</div>`;
@@ -1865,25 +1619,17 @@ function renderGerais() {
 
 function setGeraisGroup(groupId) { geraisActiveGroupId = groupId; renderGerais(); }
 
-// ═══════════════════════════════════════════
-// REGRAS
-// ═══════════════════════════════════════════
 function renderRegras() {
     const container = document.getElementById('page-regras');
     if (!container) return;
     container.innerHTML = `
     <div class="rules-container">
-        <div class="rules-hero">
-            <h1>📖 Regras do Bolão</h1>
-            <p>Leia com atenção antes de começar a palpitar!</p>
-        </div>
-        <div class="rules-card">
-            <h2>⚽ Como Funciona</h2>
+        <div class="rules-hero"><h1>📖 Regras do Bolão</h1><p>Leia com atenção antes de começar a palpitar!</p></div>
+        <div class="rules-card"><h2>⚽ Como Funciona</h2>
             <p>Para cada jogo da Copa do Mundo 2026, você deve inserir o placar que acredita que vai acontecer. Os palpites podem ser editados até a meia-noite do dia do jogo (horário de Brasília).</p>
             <p>Os pontos são calculados automaticamente assim que o administrador inserir o resultado real.</p>
         </div>
-        <div class="rules-card">
-            <h2>🏆 Pontuação — Fase de Grupos</h2>
+        <div class="rules-card"><h2>🏆 Pontuação — Fase de Grupos</h2>
             <table class="rules-table">
                 <tr><th>Situação</th><th>Pontos</th></tr>
                 <tr><td>Acertou o resultado (vencedor ou empate)</td><td><span class="pts-badge-inline pts-yellow">+3 pts</span></td></tr>
@@ -1891,8 +1637,7 @@ function renderRegras() {
                 <tr><td>Errou o resultado</td><td><span class="pts-badge-inline pts-red">0 pts</span></td></tr>
             </table>
         </div>
-        <div class="rules-card">
-            <h2>🔥 Pontuação — Fase Eliminatória</h2>
+        <div class="rules-card"><h2>🔥 Pontuação — Fase Eliminatória</h2>
             <table class="rules-table">
                 <tr><th>Situação</th><th>Pontos</th></tr>
                 <tr><td>Acertou só o empate</td><td><span class="pts-badge-inline pts-yellow">+3 pts</span></td></tr>
@@ -1904,16 +1649,14 @@ function renderRegras() {
                 <tr><td>Errou o resultado</td><td><span class="pts-badge-inline pts-red">0 pts</span></td></tr>
             </table>
         </div>
-        <div class="rules-card">
-            <h2>⭐ Jogo da Rodada</h2>
+        <div class="rules-card"><h2>⭐ Jogo da Rodada</h2>
             <table class="rules-table">
                 <tr><th>Situação</th><th>Pontos</th></tr>
                 <tr><td>Acertou resultado ou placar</td><td><span class="pts-badge-inline pts-green">Dobro dos pontos normais</span></td></tr>
                 <tr><td>Errou tudo</td><td><span class="pts-badge-inline pts-red">-5 pts</span></td></tr>
             </table>
         </div>
-        <div class="rules-card">
-            <h2>🌟 Palpites Especiais</h2>
+        <div class="rules-card"><h2>🌟 Palpites Especiais</h2>
             <table class="rules-table">
                 <tr><th>Palpite</th><th>Pontos</th></tr>
                 <tr><td>🥇 Artilheiro da Copa</td><td><span class="pts-badge-inline pts-green">+15 pts</span></td></tr>
@@ -1923,20 +1666,15 @@ function renderRegras() {
             </table>
             <div class="rules-warning">⚠️ <strong>ATENÇÃO:</strong> Os palpites especiais ficam bloqueados assim que a Copa começar.</div>
         </div>
-        <div class="rules-card">
-            <h2>⏰ Prazos e Bloqueios</h2>
+        <div class="rules-card"><h2>⏰ Prazos e Bloqueios</h2>
             <p>Todo palpite pode ser editado até a meia-noite (horário de Brasília) do dia do jogo. Os jogos do mata-mata só ficam disponíveis após os times serem definidos.</p>
         </div>
-        <div class="rules-card">
-            <h2>👥 Grupos e Ligas</h2>
+        <div class="rules-card"><h2>👥 Grupos e Ligas</h2>
             <p>O bolão é dividido em grupos (ligas). Cada grupo tem seu próprio ranking separado. Se você estiver em mais de um grupo, pode navegar entre eles pelo seletor no topo da tela.</p>
         </div>
     </div>`;
 }
 
-// ═══════════════════════════════════════════
-// ADMIN
-// ═══════════════════════════════════════════
 function renderAdmin() {
     const user = allUsers[currentUser];
     if (!user || !user.is_admin) return;
@@ -2009,7 +1747,7 @@ function renderAdminHoje() {
                     <span class="admin-match-flag">${m.homeFlag}</span><span>${m.home}</span>
                     <span class="admin-vs">vs</span>
                     <span>${m.away}</span><span class="admin-match-flag">${m.awayFlag}</span>
-                    ${m.group?`<span style="font-size:0.72rem;color:var(--gray-dark);">(Grupo ${m.group})</span>`:`<span style="font-size:0.72rem;color:var(--gray-dark);">(Jogo ${m.matchNum})</span>`}
+                    ${m.group ? `<span style="font-size:0.72rem;color:var(--gray-dark);">(Grupo ${m.group})</span>` : `<span style="font-size:0.72rem;color:var(--gray-dark);">(Jogo ${m.matchNum})</span>`}
                 </div>
                 <div class="admin-score-group">
                     <input type="number" class="admin-score-input ${result.home!==undefined?'has-value':''}" min="0" max="9" id="admin-h-hoje-${m.id}" value="${result.home!==undefined?result.home:''}" placeholder="-">
@@ -2066,7 +1804,7 @@ function renderAdminResultados() {
                     <span class="admin-match-flag">${m.homeFlag}</span><span>${m.home}</span>
                     <span class="admin-vs">vs</span>
                     <span>${m.away}</span><span class="admin-match-flag">${m.awayFlag}</span>
-                    ${m.group?`<span style="font-size:0.72rem;color:var(--gray-dark);">(Grupo ${m.group})</span>`:`<span style="font-size:0.72rem;color:var(--gray-dark);">(Jogo ${m.matchNum})</span>`}
+                    ${m.group ? `<span style="font-size:0.72rem;color:var(--gray-dark);">(Grupo ${m.group})</span>` : `<span style="font-size:0.72rem;color:var(--gray-dark);">(Jogo ${m.matchNum})</span>`}
                 </div>
                 <div class="admin-score-group">
                     <input type="number" class="admin-score-input ${result.home!==undefined?'has-value':''}" min="0" max="9" id="admin-h-res-${matchId}" value="${result.home!==undefined?result.home:''}" placeholder="-">
@@ -2092,35 +1830,21 @@ async function adminSaveResult(matchId, prefix) {
     if (!hInput || !aInput) return;
     if (hInput.value === '' || aInput.value === '') { showToast('Preencha os dois placares!', 'error'); return; }
     try {
-        await saveResult(matchId, {
-            home: parseInt(hInput.value),
-            away: parseInt(aInput.value),
-            penWinner: penSelect && penSelect.value ? penSelect.value : null
-        });
+        await saveResult(matchId, { home: parseInt(hInput.value), away: parseInt(aInput.value), penWinner: penSelect && penSelect.value ? penSelect.value : null });
         showToast('Resultado salvo!', 'success');
         renderAdminTab(adminActiveTab);
-    } catch(e) {
-        showToast('Erro ao salvar resultado.', 'error');
-    }
+    } catch(e) { showToast('Erro ao salvar resultado.', 'error'); }
 }
 
 async function adminClearResult(matchId, prefix) {
-    try {
-        await deleteResult(matchId);
-        showToast('Resultado removido!', 'success');
-        renderAdminTab(adminActiveTab);
-    } catch(e) {
-        showToast('Erro ao remover resultado.', 'error');
-    }
+    try { await deleteResult(matchId); showToast('Resultado removido!', 'success'); renderAdminTab(adminActiveTab); }
+    catch(e) { showToast('Erro ao remover resultado.', 'error'); }
 }
 
 function attachAdminScoreHandlers() {
     document.querySelectorAll('.admin-score-input').forEach(input => {
         input.addEventListener('keydown', e => { if (e.key.length===1 && !/[0-9]/.test(e.key)) e.preventDefault(); });
-        input.addEventListener('input', function() {
-            if (this.value.length > 1) this.value = this.value.slice(-1);
-            this.classList.toggle('has-value', this.value !== '');
-        });
+        input.addEventListener('input', function() { if (this.value.length > 1) this.value = this.value.slice(-1); this.classList.toggle('has-value', this.value !== ''); });
     });
 }
 
@@ -2151,15 +1875,7 @@ function renderAdminChaveamento() {
                 <div class="bracket-match-top">
                     <div class="bracket-match-num">Jogo ${match.matchNum}</div>
                     <div class="bracket-match-desc">${match.desc||''}</div>
-                    ${hasTeams
-                        ? `<div class="bracket-match-teams">
-                            <span>${currentData.homeFlag||''} ${currentData.home}</span>
-                            <span style="color:var(--gray-dark);font-size:0.8rem;margin:0 4px;">vs</span>
-                            <span>${currentData.awayFlag||''} ${currentData.away}</span>
-                            ${isManual ? '<span class="bracket-manual-badge">✏️ Manual</span>' : '<span class="bracket-auto-badge">🤖 Auto</span>'}
-                           </div>`
-                        : `<span style="color:var(--gray-dark);font-style:italic;font-size:0.85rem;">Aguardando definição...</span>`
-                    }
+                    ${hasTeams ? `<div class="bracket-match-teams"><span>${currentData.homeFlag||''} ${currentData.home}</span><span style="color:var(--gray-dark);font-size:0.8rem;margin:0 4px;">vs</span><span>${currentData.awayFlag||''} ${currentData.away}</span>${isManual ? '<span class="bracket-manual-badge">✏️ Manual</span>' : '<span class="bracket-auto-badge">🤖 Auto</span>'}</div>` : `<span style="color:var(--gray-dark);font-style:italic;font-size:0.85rem;">Aguardando definição...</span>`}
                 </div>
                 <div class="bracket-match-edit">
                     <select class="bracket-select" id="bracket-home-${id}">
@@ -2189,31 +1905,16 @@ async function bracketSave(matchId) {
     const home = homeSelect.value; const away = awaySelect.value;
     if (!home || !away) { showToast('Selecione os dois times!', 'error'); return; }
     if (home === away) { showToast('Os times devem ser diferentes!', 'error'); return; }
-    try {
-        await saveMatchDataDB(matchId, { home, homeFlag: FLAG_MAP[home]||'', away, awayFlag: FLAG_MAP[away]||'' });
-        showToast('Confronto salvo!', 'success');
-        renderAdminChaveamento();
-    } catch(e) {
-        showToast('Erro ao salvar confronto.', 'error');
-    }
+    try { await saveMatchDataDB(matchId, { home, homeFlag: FLAG_MAP[home]||'', away, awayFlag: FLAG_MAP[away]||'' }); showToast('Confronto salvo!', 'success'); renderAdminChaveamento(); }
+    catch(e) { showToast('Erro ao salvar confronto.', 'error'); }
 }
 
 async function bracketClear(matchId) {
-    try {
-        await deleteMatchData(matchId);
-        applyAutoMatchData();
-        showToast('Restaurado para automático!', 'success');
-        renderAdminChaveamento();
-    } catch(e) {
-        showToast('Erro ao restaurar.', 'error');
-    }
+    try { await deleteMatchData(matchId); applyAutoMatchData(); showToast('Restaurado para automático!', 'success'); renderAdminChaveamento(); }
+    catch(e) { showToast('Erro ao restaurar.', 'error'); }
 }
 
-function bracketRecalcAll() {
-    applyAutoMatchData();
-    showToast('Chaveamento recalculado!', 'success');
-    renderAdminChaveamento();
-}
+function bracketRecalcAll() { applyAutoMatchData(); showToast('Chaveamento recalculado!', 'success'); renderAdminChaveamento(); }
 
 function renderAdminGrupos() {
     const container = document.getElementById('admin-tab-grupos');
@@ -2225,12 +1926,9 @@ function renderAdminGrupos() {
         html += `<div class="admin-card" style="margin-bottom:12px;"><h3>Grupo ${g}</h3>
             <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
                 <tr style="background:var(--blue);color:var(--yellow);">
-                    <th style="padding:6px 10px;text-align:left;">Pos</th>
-                    <th style="padding:6px 10px;text-align:left;">Seleção</th>
-                    <th style="padding:6px 10px;text-align:center;">J</th>
-                    <th style="padding:6px 10px;text-align:center;">Pts</th>
-                    <th style="padding:6px 10px;text-align:center;">SG</th>
-                    <th style="padding:6px 10px;text-align:center;">GP</th>
+                    <th style="padding:6px 10px;text-align:left;">Pos</th><th style="padding:6px 10px;text-align:left;">Seleção</th>
+                    <th style="padding:6px 10px;text-align:center;">J</th><th style="padding:6px 10px;text-align:center;">Pts</th>
+                    <th style="padding:6px 10px;text-align:center;">SG</th><th style="padding:6px 10px;text-align:center;">GP</th>
                     <th style="padding:6px 10px;text-align:center;">Mover</th>
                 </tr>`;
         teams.forEach((team, idx) => {
@@ -2258,11 +1956,8 @@ async function moveTeamUp(group, idx) {
     const teams = groupStandings[group] ? [...groupStandings[group]] : [...(autoStandings[group]||[])];
     if (idx <= 0) return;
     [teams[idx-1], teams[idx]] = [teams[idx], teams[idx-1]];
-    try {
-        await saveGroupStandingsDB(group, teams);
-        applyAutoMatchData();
-        renderAdminGrupos();
-    } catch(e) { showToast('Erro ao salvar.', 'error'); }
+    try { await saveGroupStandingsDB(group, teams); applyAutoMatchData(); renderAdminGrupos(); }
+    catch(e) { showToast('Erro ao salvar.', 'error'); }
 }
 
 async function moveTeamDown(group, idx) {
@@ -2270,32 +1965,23 @@ async function moveTeamDown(group, idx) {
     const teams = groupStandings[group] ? [...groupStandings[group]] : [...(autoStandings[group]||[])];
     if (idx >= teams.length-1) return;
     [teams[idx], teams[idx+1]] = [teams[idx+1], teams[idx]];
-    try {
-        await saveGroupStandingsDB(group, teams);
-        applyAutoMatchData();
-        renderAdminGrupos();
-    } catch(e) { showToast('Erro ao salvar.', 'error'); }
+    try { await saveGroupStandingsDB(group, teams); applyAutoMatchData(); renderAdminGrupos(); }
+    catch(e) { showToast('Erro ao salvar.', 'error'); }
 }
 
 async function resetGroupOrder(group) {
-    try {
-        await deleteGroupStandingsDB(group);
-        applyAutoMatchData();
-        renderAdminGrupos();
-        showToast(`Grupo ${group} restaurado!`, 'success');
-    } catch(e) { showToast('Erro ao restaurar.', 'error'); }
+    try { await deleteGroupStandingsDB(group); applyAutoMatchData(); renderAdminGrupos(); showToast(`Grupo ${group} restaurado!`, 'success'); }
+    catch(e) { showToast('Erro ao restaurar.', 'error'); }
 }
 
 function renderAdminLigas() {
     const container = document.getElementById('admin-tab-ligas');
     const nonAdminUsers = Object.keys(allUsers).filter(u => !allUsers[u].is_admin);
-    let html = `<div class="admin-create-group">
-        <h3>➕ Criar Nova Liga</h3>
+    let html = `<div class="admin-create-group"><h3>➕ Criar Nova Liga</h3>
         <div class="admin-create-row">
             <input type="text" id="new-group-name" placeholder="Nome da liga (ex: Família, Trabalho...)">
             <button onclick="adminCreateGroupBtn()">Criar Liga</button>
-        </div>
-    </div>`;
+        </div></div>`;
     if (Object.keys(allGroups).length === 0) {
         html += `<div class="no-matches"><div class="icon">👥</div><p>Nenhuma liga criada ainda.</p></div>`;
     } else {
@@ -2309,20 +1995,12 @@ function renderAdminLigas() {
                 </div>
                 <div style="font-size:0.8rem;color:var(--gray-dark);margin-bottom:8px;">${members.length} membro${members.length!==1?'s':''}</div>
                 <div class="admin-members-list">`;
-            if (members.length === 0) {
-                html += `<span style="font-size:0.82rem;color:var(--gray-dark);font-style:italic;">Nenhum membro ainda.</span>`;
-            } else {
-                members.forEach(u => {
-                    html += `<div class="admin-member-chip">@${u}<button class="remove-member" onclick="adminRemoveMemberBtn('${group.id}','${u}')">×</button></div>`;
-                });
-            }
+            if (members.length === 0) { html += `<span style="font-size:0.82rem;color:var(--gray-dark);font-style:italic;">Nenhum membro ainda.</span>`; }
+            else { members.forEach(u => { html += `<div class="admin-member-chip">@${u}<button class="remove-member" onclick="adminRemoveMemberBtn('${group.id}','${u}')">×</button></div>`; }); }
             html += `</div>`;
             if (availableUsers.length > 0) {
                 html += `<div class="admin-add-member">
-                    <select id="add-member-${group.id}">
-                        <option value="">Selecionar usuário...</option>
-                        ${availableUsers.map(u => `<option value="${u}">@${u}</option>`).join('')}
-                    </select>
+                    <select id="add-member-${group.id}"><option value="">Selecionar usuário...</option>${availableUsers.map(u => `<option value="${u}">@${u}</option>`).join('')}</select>
                     <button onclick="adminAddMemberBtn('${group.id}')">+ Adicionar</button>
                 </div>`;
             }
@@ -2337,25 +2015,16 @@ async function adminCreateGroupBtn() {
     const name = nameInput.value.trim();
     if (!name) { showToast('Informe um nome para a liga!', 'error'); return; }
     const id = 'group_' + Date.now();
-    try {
-        await createGroup(id, name);
-        nameInput.value = '';
-        showToast(`Liga "${name}" criada!`, 'success');
-        renderAdminLigas();
-        setupGroupSelector(currentUser);
-    } catch(e) { showToast('Erro ao criar liga.', 'error'); }
+    try { await createGroup(id, name); nameInput.value = ''; showToast(`Liga "${name}" criada!`, 'success'); renderAdminLigas(); setupGroupSelector(currentUser); }
+    catch(e) { showToast('Erro ao criar liga.', 'error'); }
 }
 
 async function adminDeleteGroupBtn(groupId) {
     const group = allGroups[groupId];
     const name = group ? group.name : groupId;
     showModal('Excluir liga', `Tem certeza que deseja excluir a liga "${name}"?`, '🗑️', async () => {
-        try {
-            await deleteGroup(groupId);
-            showToast('Liga excluída!', 'success');
-            renderAdminLigas();
-            setupGroupSelector(currentUser);
-        } catch(e) { showToast('Erro ao excluir liga.', 'error'); }
+        try { await deleteGroup(groupId); showToast('Liga excluída!', 'success'); renderAdminLigas(); setupGroupSelector(currentUser); }
+        catch(e) { showToast('Erro ao excluir liga.', 'error'); }
     });
 }
 
@@ -2363,23 +2032,14 @@ async function adminAddMemberBtn(groupId) {
     const select = document.getElementById(`add-member-${groupId}`);
     const username = select ? select.value : '';
     if (!username) { showToast('Selecione um usuário!', 'error'); return; }
-    try {
-        await addMemberToGroup(groupId, username);
-        showToast(`@${username} adicionado!`, 'success');
-        renderAdminLigas();
-        setupGroupSelector(currentUser);
-        // Se o usuário estava na tela de espera, recarrega
-        if (currentUser === username) loadApp(username);
-    } catch(e) { showToast('Erro ao adicionar membro.', 'error'); }
+    try { await addMemberToGroup(groupId, username); showToast(`@${username} adicionado!`, 'success'); renderAdminLigas(); setupGroupSelector(currentUser); }
+    catch(e) { showToast('Erro ao adicionar membro.', 'error'); }
 }
 
 async function adminRemoveMemberBtn(groupId, username) {
     showModal('Remover membro', `Tem certeza que deseja remover @${username} desta liga?`, '👤', async () => {
-        try {
-            await removeMemberFromGroup(groupId, username);
-            showToast(`@${username} removido!`, 'success');
-            renderAdminLigas();
-        } catch(e) { showToast('Erro ao remover membro.', 'error'); }
+        try { await removeMemberFromGroup(groupId, username); showToast(`@${username} removido!`, 'success'); renderAdminLigas(); }
+        catch(e) { showToast('Erro ao remover membro.', 'error'); }
     });
 }
 
@@ -2388,9 +2048,8 @@ function renderAdminUsuarios() {
     const nonAdminUsers = Object.keys(allUsers).filter(u => !allUsers[u].is_admin).sort();
     let html = `<div class="admin-card"><h3>👤 Usuários Cadastrados</h3>
         <div style="font-size:0.82rem;color:var(--gray-dark);margin-bottom:16px;">${nonAdminUsers.length} usuário${nonAdminUsers.length!==1?'s':''} registrado${nonAdminUsers.length!==1?'s':''}</div>`;
-    if (nonAdminUsers.length === 0) {
-        html += `<p style="color:var(--gray-dark);font-size:0.9rem;">Nenhum usuário registrado ainda.</p>`;
-    } else {
+    if (nonAdminUsers.length === 0) { html += `<p style="color:var(--gray-dark);font-size:0.9rem;">Nenhum usuário registrado ainda.</p>`; }
+    else {
         nonAdminUsers.forEach(u => {
             const userGroups = Object.values(allGroups).filter(g => g.members.includes(u)).map(g => g.name||'?');
             const inGroup = userGroups.length > 0;
@@ -2412,12 +2071,8 @@ function renderAdminUsuarios() {
 
 async function adminDeleteUserBtn(username) {
     showModal('Remover usuário', `Tem certeza que deseja remover @${username}?`, '👤', async () => {
-        try {
-            await deleteUserDB(username);
-            showToast(`@${username} removido!`, 'success');
-            renderAdminUsuarios();
-            renderAdminLigas();
-        } catch(e) { showToast('Erro ao remover usuário.', 'error'); }
+        try { await deleteUserDB(username); showToast(`@${username} removido!`, 'success'); renderAdminUsuarios(); renderAdminLigas(); }
+        catch(e) { showToast('Erro ao remover usuário.', 'error'); }
     });
 }
 
@@ -2429,23 +2084,10 @@ function renderAdminEspeciais() {
         <h3>🌟 Resultados dos Palpites Especiais</h3>
         <p class="admin-special-note">Preencha os resultados ao final da Copa. Os pontos serão distribuídos automaticamente.</p>
         <div class="admin-special-grid">
-            <div class="admin-special-item">
-                <label>🥇 Artilheiro(s) (+15 pts)</label>
-                ${scorerDropdownHTML('admin-sp-top-scorer', scorerVal, false)}
-                <div style="margin-top:6px;font-size:0.75rem;color:var(--gray-dark);">Para múltiplos artilheiros, use "Outro" e separe por vírgula.</div>
-            </div>
-            <div class="admin-special-item">
-                <label>🏆 Campeão (+20 pts)</label>
-                <input type="text" id="admin-sp-champion" placeholder="Seleção campeã" value="${sr.champion||''}">
-            </div>
-            <div class="admin-special-item">
-                <label>🥈 Vice-Campeão (+15 pts)</label>
-                <input type="text" id="admin-sp-runner-up" placeholder="Seleção vice-campeã" value="${sr.runner_up||''}">
-            </div>
-            <div class="admin-special-item">
-                <label>⚡ Melhor Ataque (+15 pts)</label>
-                <input type="text" id="admin-sp-best-attack" placeholder="Seleção(ões) separadas por vírgula" value="${Array.isArray(sr.best_attack)?sr.best_attack.join(', '):(sr.best_attack||'')}">
-            </div>
+            <div class="admin-special-item"><label>🥇 Artilheiro(s) (+15 pts)</label>${scorerDropdownHTML('admin-sp-top-scorer', scorerVal, false)}<div style="margin-top:6px;font-size:0.75rem;color:var(--gray-dark);">Para múltiplos artilheiros, use "Outro" e separe por vírgula.</div></div>
+            <div class="admin-special-item"><label>🏆 Campeão (+20 pts)</label><input type="text" id="admin-sp-champion" placeholder="Seleção campeã" value="${sr.champion||''}"></div>
+            <div class="admin-special-item"><label>🥈 Vice-Campeão (+15 pts)</label><input type="text" id="admin-sp-runner-up" placeholder="Seleção vice-campeã" value="${sr.runner_up||''}"></div>
+            <div class="admin-special-item"><label>⚡ Melhor Ataque (+15 pts)</label><input type="text" id="admin-sp-best-attack" placeholder="Seleção(ões) separadas por vírgula" value="${Array.isArray(sr.best_attack)?sr.best_attack.join(', '):(sr.best_attack||'')}"></div>
         </div>
         <button class="save-btn" style="margin-top:16px;" onclick="adminSaveEspeciaisBtn()">💾 Salvar Resultados Especiais</button>
     </div>`;
@@ -2457,34 +2099,18 @@ async function adminSaveEspeciaisBtn() {
     const ch = document.getElementById('admin-sp-champion').value.trim();
     const ru = document.getElementById('admin-sp-runner-up').value.trim();
     const ba = document.getElementById('admin-sp-best-attack').value.trim();
-    const sr = {
-        topScorer: scorerValue.includes(',') ? scorerValue.split(',').map(s=>s.trim()).filter(Boolean) : scorerValue,
-        champion: ch,
-        runnerUp: ru,
-        bestAttack: ba.includes(',') ? ba.split(',').map(s=>s.trim()).filter(Boolean) : ba
-    };
-    // Mapeia para campos do banco
     const dbSr = {
-        top_scorer: sr.topScorer,
-        champion: sr.champion,
-        runner_up: sr.runnerUp,
-        best_attack: sr.bestAttack
+        top_scorer: scorerValue.includes(',') ? scorerValue.split(',').map(s=>s.trim()).filter(Boolean) : scorerValue,
+        champion: ch, runner_up: ru,
+        best_attack: ba.includes(',') ? ba.split(',').map(s=>s.trim()).filter(Boolean) : ba
     };
-    try {
-        await saveSpecialResultsDB(dbSr);
-        specialResults = dbSr;
-        showToast('Resultados especiais salvos!', 'success');
-    } catch(e) { showToast('Erro ao salvar.', 'error'); }
+    try { await saveSpecialResultsDB(dbSr); specialResults = dbSr; showToast('Resultados especiais salvos!', 'success'); }
+    catch(e) { showToast('Erro ao salvar.', 'error'); }
 }
 
-// ═══════════════════════════════════════════
-// SCORE INPUT HANDLERS
-// ═══════════════════════════════════════════
 function attachScoreInputHandlers() {
     document.querySelectorAll('.score-input').forEach(input => {
-        input.addEventListener('keydown', function(e) {
-            if (e.key.length === 1 && !/[0-9]/.test(e.key)) e.preventDefault();
-        });
+        input.addEventListener('keydown', function(e) { if (e.key.length === 1 && !/[0-9]/.test(e.key)) e.preventDefault(); });
         input.addEventListener('input', function() {
             if (this.value.length > 1) this.value = this.value.slice(-1);
             if (parseInt(this.value) > 9) this.value = '9';
@@ -2556,15 +2182,12 @@ function toggleJDR(matchId, round) {
     }
 }
 
-// ═══════════════════════════════════════════
-// SALVAR PALPITES
-// ═══════════════════════════════════════════
 async function saveBolao() {
     const btn = document.querySelector('.save-btn');
     if (btn) { btn.disabled = true; btn.textContent = 'Salvando...'; }
     try {
-        const promises = [];
         if (!allPicks[currentUser]) allPicks[currentUser] = {};
+        const matchesToSave = [];
         MATCHES.forEach(m => {
             const hi = document.getElementById('score-home-' + m.id);
             const ai = document.getElementById('score-away-' + m.id);
@@ -2574,9 +2197,12 @@ async function saveBolao() {
             if (hi.value !== '') picks[m.id].home = parseInt(hi.value);
             if (ai.value !== '') picks[m.id].away = parseInt(ai.value);
             if (picks[m.id].home !== undefined && picks[m.id].away !== undefined) {
-                promises.push(savePick(currentUser, m.id, picks[m.id]));
+                matchesToSave.push({ matchId: m.id, pick: picks[m.id] });
             }
         });
+        for (const { matchId, pick } of matchesToSave) {
+            await savePick(currentUser, matchId, pick);
+        }
         if (!isCupStarted()) {
             const special = {
                 topScorer: getScorerValue('bolao-sp-top-scorer'),
@@ -2585,25 +2211,21 @@ async function saveBolao() {
                 bestAttack: document.getElementById('bolao-sp-best-attack')?.value.trim() || ''
             };
             if (special.topScorer || special.champion || special.runnerUp || special.bestAttack) {
-                promises.push(saveSpecialPick(currentUser, special));
+                await saveSpecialPick(currentUser, special);
             }
         }
-        await Promise.all(promises);
         showToast('Palpites salvos!', 'success');
         renderBolao();
-    } catch(e) {
-        showToast('Erro ao salvar palpites.', 'error');
-    } finally {
-        if (btn) { btn.disabled = false; btn.textContent = '💾 Salvar Palpites'; }
-    }
+    } catch(e) { showToast('Erro ao salvar palpites.', 'error'); }
+    finally { if (btn) { btn.disabled = false; btn.textContent = '💾 Salvar Palpites'; } }
 }
 
 async function savePalpites() {
     const btn = document.querySelector('.save-btn');
     if (btn) { btn.disabled = true; btn.textContent = 'Salvando...'; }
     try {
-        const promises = [];
         if (!allPicks[currentUser]) allPicks[currentUser] = {};
+        const matchesToSave = [];
         MATCHES.forEach(m => {
             if (isMatchLocked(m.date)) return;
             const hi = document.getElementById('score-home-' + m.id);
@@ -2614,9 +2236,12 @@ async function savePalpites() {
             if (hi.value !== '') picks[m.id].home = parseInt(hi.value);
             if (ai.value !== '') picks[m.id].away = parseInt(ai.value);
             if (picks[m.id].home !== undefined && picks[m.id].away !== undefined) {
-                promises.push(savePick(currentUser, m.id, picks[m.id]));
+                matchesToSave.push({ matchId: m.id, pick: picks[m.id] });
             }
         });
+        for (const { matchId, pick } of matchesToSave) {
+            await savePick(currentUser, matchId, pick);
+        }
         if (!isCupStarted()) {
             const special = {
                 topScorer: getScorerValue('palpites-sp-top-scorer'),
@@ -2624,46 +2249,36 @@ async function savePalpites() {
                 runnerUp: document.getElementById('palpites-sp-runner-up')?.value.trim() || '',
                 bestAttack: document.getElementById('palpites-sp-best-attack')?.value.trim() || ''
             };
-            promises.push(saveSpecialPick(currentUser, special));
+            await saveSpecialPick(currentUser, special);
         }
-        await Promise.all(promises);
         showToast('Palpites atualizados!', 'success');
         renderPalpites();
-    } catch(e) {
-        showToast('Erro ao salvar palpites.', 'error');
-    } finally {
-        if (btn) { btn.disabled = false; btn.textContent = '💾 Salvar Alterações'; }
-    }
+    } catch(e) { showToast('Erro ao salvar palpites.', 'error'); }
+    finally { if (btn) { btn.disabled = false; btn.textContent = '💾 Salvar Alterações'; } }
 }
 
-// ═══════════════════════════════════════════
-// ENTER AUTH
-// ═══════════════════════════════════════════
 document.getElementById('login-password').addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });
 document.getElementById('login-username').addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });
 document.getElementById('reg-password2').addEventListener('keydown', e => { if (e.key==='Enter') doRegister(); });
 
-// ═══════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════
 async function init() {
     showScreen('screen-loading');
     try {
         await loadAllData();
         const savedUser = localStorage.getItem('bc26_user');
-        if (savedUser && allUsers[savedUser]) {
-            currentUser = savedUser;
-            loadApp(savedUser);
-        } else {
-            showScreen('screen-login');
-        }
-    } catch(e) {
-        console.error('Erro na inicialização:', e);
-        showScreen('screen-login');
-    }
+        if (savedUser && allUsers[savedUser]) { currentUser = savedUser; loadApp(savedUser); }
+        else { showScreen('screen-login'); }
+    } catch(e) { console.error('Erro na inicialização:', e); showScreen('screen-login'); }
 }
 
 init();
 </script>
 </body>
 </html>
+
+							<script>
+                            	
+							</script>
+                        </body>
+                        </html>
+                    
